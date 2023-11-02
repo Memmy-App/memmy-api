@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.string('username').notNullable().index();
       table.string('auth_token', 510).notNullable().index();
       table.bigint('last_check').defaultTo(0);
+      table.bigint('last_notified_id').defaultTo(0);
     });
   }
 
