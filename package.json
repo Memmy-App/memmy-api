@@ -34,11 +34,14 @@
     "@adonisjs/lucid": "^18.4.2",
     "@adonisjs/repl": "^3.1.0",
     "@giphy/js-fetch-api": "^5.2.0",
+    "@types/node-fetch": "^2.6.8",
     "lemmy-js-client": "0.18.1",
     "luxon": "^3.4.3",
     "mysql2": "^3.6.2",
+    "node-fetch": "2",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
+    "request": "^2.88.2",
     "source-map-support": "^0.5.21"
   }
 }

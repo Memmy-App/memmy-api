@@ -2,16 +2,26 @@ import {GiphyFetch} from '@giphy/js-fetch-api';
 import Env from '@ioc:Adonis/Core/Env';
 import { IGif } from '@giphy/js-types';
 
-export const giphySearch = async (term: string): Promise<string[]> => {
-  const gf = new GiphyFetch(Env.get('GIPHY_API_TOKEN'));
-  const {data} = await gf.search(term, {limit: 30, sort: 'relevant'});
+interface IResult {
+  proxyUrl: string;
+  url: string;
+}
 
-  return data.map((gif: IGif) => `https://i.giphy.com/${gif.id}`);
+export const giphySearch = async (term: string, offset = 0): Promise<IResult[]> => {
+  const gf = new GiphyFetch(Env.get('GIPHY_API_TOKEN'));
+  const {data} = await gf.search(term, {limit: 5, sort: 'relevant', offset});
+
+  return data.map((gif: IGif) => ({
+    proxyUrl: `${Env.get('BASE_URL')}/giphy/image/?image=${gif.id}.gif`,
+    url: 'https://i.giphy.com/media/' + gif.id + '.gif',
+  }));
 };
 
-export const giphyTrending = async (): Promise<string[]> => {
+export const giphyTrending = async (offset = 0): Promise<IResult[]> => {
   const gf = new GiphyFetch(Env.get('GIPHY_API_TOKEN'));
-  const {data} = await gf.trending({limit: 30});
+  const {data} = await gf.trending({limit: 5, offset});
 
-  return data.map((gif: IGif) => `https://i.giphy.com/${gif.id}.gif`);
-};
+  return data.map((gif: IGif) => ({
+    proxyUrl: `${Env.get('BASE_URL')}/giphy/image/?image=${gif.id}.gif`,
+    url: 'https://i.giphy.com/media/' + gif.id + '.gif',
+  }));};

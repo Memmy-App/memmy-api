@@ -26,4 +26,5 @@ Route.get('account/push/status', 'AccountController.pushStatus');
 
 Route.get('giphy/search', 'GiphyController.search');
 Route.get('giphy/trending', 'GiphyController.trending');
+Route.get('giphy/image', 'GiphyController.proxy');
 
