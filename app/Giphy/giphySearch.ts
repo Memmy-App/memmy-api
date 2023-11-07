@@ -9,7 +9,7 @@ interface IResult {
 
 export const giphySearch = async (term: string, offset = 0): Promise<IResult[]> => {
   const gf = new GiphyFetch(Env.get('GIPHY_API_TOKEN'));
-  const {data} = await gf.search(term, {limit: 5, sort: 'relevant', offset});
+  const {data} = await gf.search(term, {limit: 20, sort: 'relevant', offset});
 
   return data.map((gif: IGif) => ({
     proxyUrl: `${Env.get('BASE_URL')}/giphy/image/?image=${gif.id}.gif`,
@@ -19,7 +19,7 @@ export const giphySearch = async (term: string, offset = 0): Promise<IResult[]> 
 
 export const giphyTrending = async (offset = 0): Promise<IResult[]> => {
   const gf = new GiphyFetch(Env.get('GIPHY_API_TOKEN'));
-  const {data} = await gf.trending({limit: 5, offset});
+  const {data} = await gf.trending({limit: 20, offset});
 
   return data.map((gif: IGif) => ({
     proxyUrl: `${Env.get('BASE_URL')}/giphy/image/?image=${gif.id}.gif`,
