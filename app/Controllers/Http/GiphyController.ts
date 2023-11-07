@@ -41,6 +41,11 @@ export default class GiphyController {
         },
       });
 
+      if(res.status !== 200) {
+        ctx.response.notFound();
+        return;
+      }
+
       ctx.response.stream(res.body);
     } catch(e: any) {
       ctx.response.internalServerError();
