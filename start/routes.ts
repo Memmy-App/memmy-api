@@ -24,3 +24,6 @@ Route.post('account/push/enable', 'AccountController.pushEnable');
 Route.post('account/push/disable', 'AccountController.pushDisable');
 Route.get('account/push/status', 'AccountController.pushStatus');
 
+Route.get('giphy/search', 'GiphyController.search');
+Route.get('giphy/trending', 'GiphyController.trending');
+
